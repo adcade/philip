@@ -35,3 +35,4 @@ def register_command(subparsers):
     parser.add_argument("--dry-run", action='store_true', help="dry run this command without really execute")
     parser.add_argument("-m", "--message", type=str, default="Philipfile",
                         help="the message file Philip delivery to marathon")
+    parser.add_argument("-t", "--tag", type=str, help="the tag of the application")

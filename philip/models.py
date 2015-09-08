@@ -35,7 +35,7 @@ class Artifact:
 def load_artifact(profile_names, filename, tag=None):
     try:
         with open(filename, 'r') as fp:
-            artifact_conf = yaml.load(fp.read())
+            artifact_conf = yaml.load(fp.read().replace("{{ tag }}", tag)) # Inject the tag value inside the message
 
             if 'profiles' in artifact_conf:
                 profiles_conf = artifact_conf['profiles']
