@@ -1,18 +1,30 @@
-# philip
-Philippides is the messager who delivered the news of victory from Marathon to Athens.
-Philip is a small tool for deploying apps to [marathon](https://mesosphere.github.io/marathon/) and, of course, deliver the news of success from Marathon to the user.
+# Philip
 
-Currently only supports tags for docker apps, groups with tags are not supported. (if you don't need to update tag then it doesn't matter)
+*Philippides is the messenger who delivered the news of victory from Marathon to Athens.*
+
+Philip is a small tool for deploying applications to [Marathon](https://mesosphere.github.io/marathon/) and, of course, deliver the news of success from Marathon to the user.
+
+Currently it only supports tags for docker applications, groups with tags are not supported (if you don't need to update tag then it doesn't matter).
 
 ## Install
+
+Directly from GitHub:
+
 ``` bash
-pip install git+https://github.com/greencase/philip.git
+$ pip install git+https://github.com/adcade/philip.git@0.1.0
+```
+
+Or, build from the sources:
+
+```bash
+$ python setup.py install
 ```
 
 ## Configuration
-By default it reads from:
+
+By default, Philip reads from:
 `~/.config/philip/config.yml` or `~/.config/philip/config.json`
-but you can specific config file by `philip -c config.json app.json` please reference to commandline help
+but you can choose a specific configuration file by `philip -c config.json app.json` please reference to CLI help (`philip -h`)
 
 ``` yaml
 stage:
@@ -30,11 +42,12 @@ whatever:
 ```
 
 ## Marathon artifact/group extension
-- first, like the configuration, you are allow to use either json or yaml
-- second, you can add profiles that can override the default content of the artifact/group configuration. The extended format is under the format like below
+
+- First, like the configuration, you are allowed to use either json or yaml,
+- Second, you can add profiles that can override the default content of the artifact/group configuration. The extended format is under the format like below:
 
 ``` yaml
-# you regular artifact/group config
+# your regular artifact/group config
 # ...
 setting1:
   setting1_2: 'being overwritten'
@@ -49,7 +62,8 @@ profiles:
   # other profiles ...
 ```
 
-a more detailed sample:
+A more detailed sample:
+
 ``` yaml
 id: python
 instances: 1
@@ -78,7 +92,7 @@ profiles:
             servicePort: 10001
 ```
 
-when specify your profile as stage (`philip -p stage app.yml`), you got a final config like below:
+When you specify your profile as stage (`philip apps create -p stage -m app.yml`), you got a final config like below:
 
 ``` yaml
 id: ./python-8001-10001
@@ -97,27 +111,54 @@ container:
         servicePort: 10001
 ```
 
-## Commandline Help
-``` bash
-philip -p prod -t 1.0 app.yaml
-```
-this will deploy app.yaml with docker image tagged as 1.0, use the profile `prod` with it's url, username, password and overwrite the marathon artifact/group with the corresponding `profiles` section, please see `Marathon artifact/group extension`
+## CLI
 
-by default `stage` is being used as your profile, and use the image tag specified in `app.yaml`
+The CLI is organized the same way as [Marathon REST API](https://mesosphere.github.io/marathon/docs/rest-api.html):
 
-Please read detail in `philip -h`:
-```
-usage: philip [-h] [-p PROFILE] [-c CONFFILE] [-t TAG] [--dry-run] filename
+```bash
+$ philip -h
+usage: philip [-h] {apps,tasks,groups,deployments,server,events} ...
 
 positional arguments:
-  filename              config filename
+  {apps,tasks,groups,deployments,server,events}
+                        sub-command help
+    apps                api for apps
+    tasks               api for tasks
+    groups              api for groups
+    deployments         api for deployments
+    server              api for servers
+    events              api for events
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
+
+And you can also do:
+
+```bash
+$ philip apps create -h
+usage: philip apps create [-h] [-p PROFILE] [-c CONFIGFILE] [--dry-run]
+                          [-m MESSAGE] [-t TAG]
 
 optional arguments:
   -h, --help            show this help message and exit
   -p PROFILE, --profile PROFILE
                         profile to run
-  -c CONFFILE, --conffile CONFFILE
-                        config file of the deployment script
-  -t TAG, --tag TAG     docker tag
-  --dry-run             dry run this deploy without really execute
+  -c CONFIGFILE, --configfile CONFIGFILE
+                        Config for Philip, by default locates at
+                        ~/.config/philip/config.json
+  --dry-run             dry run this command without really execute
+  -m MESSAGE, --message MESSAGE
+                        the message file Philip delivery to marathon
+  -t TAG, --tag TAG     the tag of the application
 ```
+
+So if you want to create a new application on Marathon using Philip, you would do:
+
+```bash
+$ philip apps create -m my-app.yaml -p stage -t 0.1.0
+```
+
+This will deploy `my-app.yaml` with the docker image tagged as 0.1.0, use the profile `stage` with it's `url`, `username`, `password` and overwrite the marathon artifact/group with the corresponding `profiles` section, please see `Marathon artifact/group extension`.
+
+**Note: by default `stage` is being used as your profile, `Philipfile` as the message file, and use the image tag specified in the file message.**
