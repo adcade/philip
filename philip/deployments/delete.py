@@ -15,7 +15,7 @@ def delete_deployment(server, deployment_id):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = delete_deployment(server, args.deployment)
     print_json(result)
 

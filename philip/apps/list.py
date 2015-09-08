@@ -20,7 +20,7 @@ def list_apps(server, cmd="", embed=None):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = list_apps(server)
     print_json(result)
 

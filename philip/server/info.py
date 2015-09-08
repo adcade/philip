@@ -15,7 +15,7 @@ def info(server):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = info(server)
 
     print_json(result)

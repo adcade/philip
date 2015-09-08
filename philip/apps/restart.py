@@ -18,7 +18,7 @@ def restart_app(server, app_id, force=False):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = restart_app(server, args.app, args.force)
     print_json(result)
 

@@ -22,7 +22,7 @@ def get_app_version(server, app_id, version):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     if args.version:
         result = get_app_version(server, args.app, args.version)
     else:

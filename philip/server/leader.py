@@ -15,7 +15,7 @@ def leader(server):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = leader(server)
 
     print_json(result)
@@ -23,6 +23,6 @@ def run(args):
 
 def register_command(subparsers):
     parser = subparsers.add_parser('leader', parents=[parent_parser],
-                                   help='Returns the current leader. If no leader exists, '
+                                   help='Get the current leader. If no leader exists, '
                                         'Marathon will respond with a 404 error.')
     parser.set_defaults(func=run)

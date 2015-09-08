@@ -22,8 +22,8 @@ def create_group(server, artifact, dry_run=False):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
-    artifact = load_artifact(args.profiles, args.message, args.tag)
+    server = load_server(args.profile, args.configfile)
+    artifact = load_artifact(args.profile, args.message, args.tag)
     result = create_group(server, artifact, args.dry_run)
     print_json(result)
 

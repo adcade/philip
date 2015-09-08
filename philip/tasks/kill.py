@@ -16,6 +16,7 @@ def kill_app_task(server, app_id, task_id, scale=False):
     r = requests.delete(url, params=params, auth=(server.username, server.password), headers=default_headers)
     return json.loads(r.text) if r.text else {}
 
+
 def kill_app_all_tasks(server, app_id, host=None, scale=False):
     url = "%s/v2/apps/%s/tasks" % (server.url, app_id)
     params = {}
@@ -29,7 +30,7 @@ def kill_app_all_tasks(server, app_id, host=None, scale=False):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     if args.task:
         result = kill_app_task(server, args.app, args.task, args.scale)
     else:

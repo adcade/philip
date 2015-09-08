@@ -25,11 +25,10 @@ def stream_events(server):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     stream_events(server)
 
 
 def register_command(subparsers):
     parser = subparsers.add_parser('stream', parents=[parent_parser], help='Attach to the marathon event stream.')
     parser.set_defaults(func=run)
-

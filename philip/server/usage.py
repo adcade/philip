@@ -40,7 +40,7 @@ def parse_usage(server, result):
 
 
 def run(args):
-    server = load_server(args.profiles, args.conffile)
+    server = load_server(args.profile, args.configfile)
     result = usage(server)
     parse_usage(server, result)
 

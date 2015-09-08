@@ -1,19 +1,19 @@
 import argcomplete
 
 from constants import HelpOnErrorArgumentParser
-import app
-import task
-import group
-import deployment
+import apps
+import tasks
+import groups
+import deployments
 import server
-import event
+import events
 
 
 def main():
     parser = HelpOnErrorArgumentParser()
     subparsers = parser.add_subparsers(parser_class=HelpOnErrorArgumentParser, help='sub-command help')
 
-    for sub_command in [app, task, group, deployment, server, event]:
+    for sub_command in [apps, tasks, groups, deployments, server, events]:
         sub_command.register_command(subparsers)
 
     argcomplete.autocomplete(parser)
