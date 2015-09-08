@@ -24,8 +24,8 @@ setup_options = dict(
     description='Command Line tool for Marathon.',
     long_description=open('README.md').read(),
     author='leonmax',
-    url='https://github.com/greencase/philip',
-    scripts=['bin/phi'],
+    url='https://github.com/adcade/philip',
+    scripts=['bin/philip'],
     packages=find_packages(exclude=['tests*']),
     package_data={'philip': ['example/*.json', 'examples/*/*.rst',
                              'config/*.yml', 'config/*.yaml', 'config/*.json']},
@@ -49,6 +49,6 @@ setup_options = dict(
     ),
 )
 
-setup_options['console'] = ['bin/phi']
+setup_options['console'] = ['bin/philip']
 
 setup(**setup_options)

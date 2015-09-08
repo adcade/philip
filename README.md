@@ -2,7 +2,7 @@
 Philippides is the messager who delivered the news of victory from Marathon to Athens.
 Philip is a small tool for deploying apps to [marathon](https://mesosphere.github.io/marathon/) and, of course, deliver the news of success from Marathon to the user.
 
-currently only supports tags for docker apps, groups with tags are not supported. (if you don't need to update tag then it doesn't matter)
+Currently only supports tags for docker apps, groups with tags are not supported. (if you don't need to update tag then it doesn't matter)
 
 ## Install
 ``` bash
@@ -105,7 +105,7 @@ this will deploy app.yaml with docker image tagged as 1.0, use the profile `prod
 
 by default `stage` is being used as your profile, and use the image tag specified in `app.yaml`
 
-Please read detail in `philip -h`: 
+Please read detail in `philip -h`:
 ```
 usage: philip [-h] [-p PROFILE] [-c CONFFILE] [-t TAG] [--dry-run] filename
 
